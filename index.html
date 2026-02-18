@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday, Berlin!</title>
+    <style>
+        body {background:#111; color:#00ff99; font-family:monospace; text-align:center; padding-top:80px;}
+        .box {border:2px solid #00ff99; padding:40px; width:500px; margin:auto;}
+        input {background:black; color:#00ff99; border:1px solid #00ff99; padding:8px; margin-top:10px;}
+        button {background:black; color:#00ff99; border:1px solid #00ff99; padding:10px 20px; margin-top:20px; cursor:pointer;}
+    </style>
+</head>
+<body>
+
+<div class="box" id="quiz">
+    <h2>Birthday Quiz</h2>
+    <p id="question"></p>
+    <input type="text" id="answer"><br>
+    <button onclick="check()">Submit</button>
+    <p id="result"></p>
+</div>
+
+<div class="box" id="final" style="display:none;">
+    <h1>Happy Birthday, Berlin!</h1>
+    <p>Another year stronger.</p>
+    <p>Another year smarter.</p>
+    <p>This year is yours.</p>
+</div>
+
+<script>
+const questions = [
+    {q:"1) What color is the sky on a clear day?", a:"blue"},
+    {q:"2) How many days are in a week?", a:"7"},
+    {q:"3) What is 2 + 2?", a:"4"}
+];
+
+let current = 0;
+document.getElementById("question").innerText = questions[current].q;
+
+function check() {
+    let input = document.getElementById("answer").value.toLowerCase().trim();
+    if(input === questions[current].a) {
+        current++;
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+
+        if(current < questions.length) {
+            document.getElementById("question").innerText = questions[current].q;
+        } else {
+            document.getElementById("quiz").style.display = "none";
+            document.getElementById("final").style.display = "block";
+        }
+    } else {
+        document.getElementById("result").innerText = "Wrong answer. Try again.";
+    }
+}
+</script>
+
+</body>
+</html>
